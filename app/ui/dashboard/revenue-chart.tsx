@@ -2,6 +2,7 @@ import { generateYAxis } from '@/app/lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import { Revenue } from '@/app/lib/definitions';
+import { fetchRevenue } from '@/app/lib/data';
 
 // This component is representational only.
 // For data visualization UI, check out:
@@ -9,13 +10,11 @@ import { Revenue } from '@/app/lib/definitions';
 // https://www.chartjs.org/
 // https://airbnb.io/visx/
 
-export default async function RevenueChart({
-  revenue,
-}: {
-  revenue: Revenue[];
-}) {
+export default async function RevenueChart() {
   const chartHeight = 350;
   // NOTE: Uncomment this code in Chapter 7
+
+  const revenue = await fetchRevenue()
 
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
@@ -63,3 +62,36 @@ export default async function RevenueChart({
     </div>
   );
 }
+
+/*sendo um dos componentes que mais atrasam a renderização da rota /dashboard,
+ o seu carregamento foi isolado usando a compponete Suspense */
+
+/*
+xport default async function Page() {
+
+  const revenue = await fetchRevenue();
+  const fiveLatestInvoices = await fetchLatestInvoices();
+  const {totalPaidInvoices, totalPendingInvoices, numberOfInvoices, numberOfCustomers} = await fetchCardData() 
+
+  return (
+    <main>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+        Dashboard
+      </h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        { <Card title="Collected" value={totalPaidInvoices} type="collected" /> }
+        { <Card title="Pending" value={totalPendingInvoices} type="pending" /> }
+        { <Card title="Total Invoices" value={numberOfInvoices} type="invoices" /> }
+        { <Card
+          title="Total Customers"
+          value={numberOfCustomers}
+          type="customers"
+        /> }
+      </div>
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+        { <RevenueChart revenue={revenue}  />}
+        {<LatestInvoices latestInvoices={fiveLatestInvoices} /> }
+      </div>
+    </main>
+  );
+ */

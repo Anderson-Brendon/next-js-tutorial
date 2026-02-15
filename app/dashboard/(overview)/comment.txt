@@ -1,0 +1,3 @@
+os parenteses nas pastas (), é um padrao que indica agrupamento de rota/route group,
+para que configurações da pagina como o loading não afete as subrotas e melhor organização das rotas
+isto não afetas a estruturas das urls
