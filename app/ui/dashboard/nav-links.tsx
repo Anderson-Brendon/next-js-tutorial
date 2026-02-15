@@ -42,5 +42,5 @@ export default function NavLinks() {
     </>
   );
 }
-/*//o componente Link que aquela rota(href) deve ser precarregada 
+/*o componente Link sinaliza que aquela rota(href) deve ser precarregada 
 e a navegação acontece no lado do cliente, sendo um misto de spa e csr */
